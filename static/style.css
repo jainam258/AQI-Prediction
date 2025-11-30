@@ -1,0 +1,30 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f3f4f6;
+}
+
+.navbar {
+    background: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar nav a {
+    margin-left: 20px;
+    color: #555;
+    font-weight: 500;
+}
+
+.navbar nav a.active {
+    font-weight: 700;
+    color: #4f46e5;
+    border-bottom: 3px solid #4f46e5;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #4f46e5;
+}

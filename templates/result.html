@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AQI Result</title>
+    <style>
+
+        body {
+            background-color: #0D1117;
+            color: #E6EDF3;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .container {
+            background-color: #161B22;
+            width: 450px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #58A6FF;
+        }
+
+        h3 {
+            margin-top: 5px;
+            font-size: 22px;
+            color: #E6EDF3;
+        }
+
+        .error {
+            color: #FF6B6B;
+            font-size: 18px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #238636;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        a:hover {
+            background-color: #2EA043;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        {% if error %}
+            <h2 class="error">{{ error }}</h2>
+        {% else %}
+            <h2>AQI Prediction for {{ city }}</h2>
+            <h3>{{ prediction }}</h3>
+        {% endif %}
+
+        <a href="/">Back</a>
+    </div>
+
+</body>
+</html>
