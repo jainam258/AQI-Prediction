@@ -114,8 +114,10 @@ It will generate:
 * Responsive
 * Dropdown city selection
 * Clean prediction output
+* OUTPUT :
+* page 1 <img width="1919" height="926" alt="image" src="https://github.com/user-attachments/assets/71bd6e92-c925-40d8-b092-4acdd757edd2" />
+* page 2 <img width="1919" height="926" alt="image" src="https://github.com/user-attachments/assets/9cea5301-a063-44db-9ecb-7f24d87b2f50" />
 
-*(Add screenshots if you want)*
 
 ---
 
@@ -136,3 +138,4 @@ artifacts/
 
 Pull requests are welcome.
 For major changes, open an issue first to discuss what you want to update.
+
