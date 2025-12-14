@@ -1,72 +1,215 @@
+<!-- ==================== result.html ==================== -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AQI Result</title>
-    <style>
-
-        body {
-            background-color: #0D1117;
-            color: #E6EDF3;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 100px;
-        }
-
-        .container {
-            background-color: #161B22;
-            width: 450px;
-            margin: auto;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        h2 {
-            margin-bottom: 10px;
-            color: #58A6FF;
-        }
-
-        h3 {
-            margin-top: 5px;
-            font-size: 22px;
-            color: #E6EDF3;
-        }
-
-        .error {
-            color: #FF6B6B;
-            font-size: 18px;
-        }
-
-        a {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 10px 20px;
-            background-color: #238636;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: 0.2s;
-        }
-
-        a:hover {
-            background-color: #2EA043;
-        }
-
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirWatch - AQI Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                <span>AirWatch</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/predict" class="active"><i class="fas fa-chart-line"></i> Predict</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="container">
-
+    <!-- Result Display -->
+    <div class="prediction-container">
         {% if error %}
-            <h2 class="error">{{ error }}</h2>
+            <div class="result-card show">
+                <div style="color: #FF6B6B; font-size: 1.5rem; margin: 2rem 0;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h2>{{ error }}</h2>
+                </div>
+                <a href="/predict" class="predict-button" style="display: inline-block; text-decoration: none; margin-top: 1rem;">Try Again</a>
+            </div>
         {% else %}
-            <h2>AQI Prediction for {{ city }}</h2>
-            <h3>{{ prediction }}</h3>
-        {% endif %}
+            <div class="result-card show">
+                <h2>AQI for {{ city }}</h2>
+                <div class="aqi-value">{{ prediction }}</div>
+                
+                {% if prediction <= 50 %}
+                    <div class="aqi-category" style="background-color: rgba(34, 197, 94, 0.2); color: #22C55E;">
+                        <i class="fas fa-check-circle"></i> Good
+                    </div>
+                    <div class="health-advice">
+                        <h3><i class="fas fa-info-circle" style="color: #22C55E;"></i> Health Advice</h3>
+                        <p>Air quality is satisfactory. Enjoy outdoor activities!</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <i class="fas fa-wind"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Wind Quality</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Good</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-tint"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Humidity</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Normal</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-eye"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Visibility</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Clear</div>
+                        </div>
+                    </div>
+                
+                {% elif prediction <= 100 %}
+                    <div class="aqi-category" style="background-color: rgba(234, 179, 8, 0.2); color: #EAB308;">
+                        <i class="fas fa-exclamation-triangle"></i> Moderate
+                    </div>
+                    <div class="health-advice">
+                        <h3><i class="fas fa-info-circle" style="color: #EAB308;"></i> Health Advice</h3>
+                        <p>Air quality is acceptable. Sensitive individuals should consider limiting prolonged outdoor exertion.</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <i class="fas fa-wind"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Wind Quality</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Good</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-tint"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Humidity</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Normal</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-eye"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Visibility</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Clear</div>
+                        </div>
+                    </div>
+                
+                {% elif prediction <= 150 %}
+                    <div class="aqi-category" style="background-color: rgba(249, 115, 22, 0.2); color: #F97316;">
+                        <i class="fas fa-exclamation-triangle"></i> Unhealthy for Sensitive Groups
+                    </div>
+                    <div class="health-advice">
+                        <h3><i class="fas fa-exclamation-triangle" style="color: #F97316;"></i> Health Advice</h3>
+                        <p>Members of sensitive groups may experience health effects. Reduce prolonged outdoor exertion.</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <i class="fas fa-wind"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Wind Quality</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Moderate</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-tint"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Humidity</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Normal</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-eye"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Visibility</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Moderate</div>
+                        </div>
+                    </div>
+                
+                {% elif prediction <= 200 %}
+                    <div class="aqi-category" style="background-color: rgba(239, 68, 68, 0.2); color: #EF4444;">
+                        <i class="fas fa-times-circle"></i> Unhealthy
+                    </div>
+                    <div class="health-advice">
+                        <h3><i class="fas fa-exclamation-circle" style="color: #EF4444;"></i> Health Advice</h3>
+                        <p>Everyone may begin to experience health effects. Avoid prolonged outdoor exertion.</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <i class="fas fa-wind"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Wind Quality</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Poor</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-tint"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Humidity</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Normal</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-eye"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Visibility</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Hazy</div>
+                        </div>
+                    </div>
+                
+                {% elif prediction <= 300 %}
+                    <div class="aqi-category" style="background-color: rgba(168, 85, 247, 0.2); color: #A855F7;">
+                        <i class="fas fa-times-circle"></i> Very Unhealthy
+                    </div>
+                    <div class="health-advice">
+                        <h3><i class="fas fa-exclamation-circle" style="color: #A855F7;"></i> Health Advice</h3>
+                        <p>Health alert: everyone may experience serious health effects. Stay indoors.</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <i class="fas fa-wind"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Wind Quality</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Poor</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-tint"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Humidity</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">High</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-eye"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Visibility</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Poor</div>
+                        </div>
+                    </div>
+                
+                {% else %}
+                    <div class="aqi-category" style="background-color: rgba(127, 29, 29, 0.4); color: #991B1B;">
+                        <i class="fas fa-skull-crossbones"></i> Hazardous
+                    </div>
+                    <div class="health-advice">
+                        <h3><i class="fas fa-exclamation-triangle" style="color: #991B1B;"></i> Health Advice</h3>
+                        <p>Health warnings of emergency conditions. Avoid all outdoor activities.</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <i class="fas fa-wind"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Wind Quality</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Very Poor</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-tint"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Humidity</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">High</div>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-eye"></i>
+                            <div style="font-size: 0.9rem; color: #8B949E; margin-top: 0.5rem;">Visibility</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">Very Poor</div>
+                        </div>
+                    </div>
+                {% endif %}
 
-        <a href="/">Back</a>
+                <a href="/predict" class="predict-button" style="display: inline-block; text-decoration: none; margin-top: 2rem;">Check Another City</a>
+            </div>
+        {% endif %}
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <i class="fas fa-cloud"></i>
+            <span>AirWatch</span>
+        </div>
+        <p style="color: #8B949E; margin-bottom: 0.5rem;">Machine Learning powered AQI predictions for a healthier tomorrow</p>
+        <p style="color: #6E7681; font-size: 0.9rem;">© 2025 AirWatch. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,79 @@
+<!-- ==================== about.html ==================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirWatch - About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                <span>AirWatch</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/predict"><i class="fas fa-chart-line"></i> Predict</a></li>
+                <li><a href="/about" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Content -->
+    <div class="about-container">
+        <h1 style="text-align: center; margin-bottom: 3rem;">About AirWatch</h1>
+
+        <div class="about-card">
+            <h2>Our Mission</h2>
+            <p>AirWatch is dedicated to providing accurate, real-time air quality information to help people make informed decisions about their health and outdoor activities. We believe everyone deserves access to reliable environmental data.</p>
+            <p>Our platform uses advanced machine learning algorithms to predict Air Quality Index (AQI) values for cities across India, helping millions stay safe and healthy.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Technology</h2>
+            <h3>Machine Learning Model</h3>
+            <p>We use Random Forest Regression trained on real-world historical data from city_day.csv to provide accurate predictions with R² scores between 0.85-0.90.</p>
+            
+            <h3>Data Sources</h3>
+            <p>Our model is trained on comprehensive air quality data including PM2.5, PM10, NO2, SO2, CO, and O3 measurements from monitoring stations across India.</p>
+            
+            <h3>Tech Stack</h3>
+            <p>Built with Flask backend, scikit-learn for ML, and modern web technologies for a responsive and intuitive user experience.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Why Air Quality Matters</h2>
+            <p>Air pollution is one of the world's leading risk factors for premature death. Poor air quality can cause respiratory issues, cardiovascular problems, and reduced life expectancy.</p>
+            <p>By providing accessible air quality information, we empower individuals to take protective measures when pollution levels are high, ultimately contributing to better public health outcomes.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Contact Us</h2>
+            <p>Have questions or suggestions? We'd love to hear from you!</p>
+            <p><i class="fas fa-envelope"></i> Email: info@airwatch.com</p>
+            <p><i class="fas fa-phone"></i> Phone: +91 999999999</p>
+            <div style="margin-top: 1rem;">
+                <a href="https://github.com" style="color: #58A6FF; margin-right: 1rem;"><i class="fab fa-github fa-2x"></i></a>
+                <a href="https://twitter.com" style="color: #58A6FF; margin-right: 1rem;"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://linkedin.com" style="color: #58A6FF;"><i class="fab fa-linkedin fa-2x"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <i class="fas fa-cloud"></i>
+            <span>AirWatch</span>
+        </div>
+        <p style="color: #8B949E; margin-bottom: 0.5rem;">Machine Learning powered AQI predictions for a healthier tomorrow</p>
+        <p style="color: #6E7681; font-size: 0.9rem;">© 2025 AirWatch. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

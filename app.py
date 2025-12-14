@@ -1,41 +1,48 @@
 from flask import Flask, render_template, request
 import joblib
-import datetime
+from datetime import datetime
 
 app = Flask(__name__)
 
-# Load model + encoder
-model = joblib.load("artifacts/city_aqi_model.joblib")
-encoder = joblib.load("artifacts/city_label_encoder.joblib")
+# Load your trained model
+model = joblib.load('artifacts/city_aqi_model.joblib')
+label_encoder = joblib.load('artifacts/city_label_encoder.joblib')
 
-@app.route("/")
+@app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template('index.html')
 
-@app.route("/predict", methods=["POST"])
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
-    city = request.form.get("city")
+    if request.method == 'POST':
+        try:
+            city = request.form.get('city')
+            
+            # Encode city
+            city_encoded = label_encoder.transform([city])[0]
+            
+            # Get current date
+            now = datetime.now()
+            day = now.day
+            month = now.month
+            year = now.year
+            
+            # Make prediction
+            features = [[city_encoded, day, month, year]]
+            prediction = model.predict(features)[0]
+            
+            return render_template('result.html', 
+                                 city=city, 
+                                 prediction=round(prediction, 2))
+        except Exception as e:
+            return render_template('result.html', 
+                                 error=f"Error: {str(e)}")
+    
+    return render_template('predict.html')
 
-    try:
-        city_encoded = encoder.transform([city])[0]
-    except:
-        return render_template("result.html", 
-                               city=city, 
-                               error="City not found in training dataset!")
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-    today = datetime.datetime.today()
-    month = today.month
-    day = today.day
-    year = today.year
-
-    X = [[city_encoded, month, day, year]]
-    pred = model.predict(X)[0]
-
-    return render_template(
-        "result.html",
-        city=city,
-        prediction=round(float(pred), 2)
-    )
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)

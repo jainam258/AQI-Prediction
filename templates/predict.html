@@ -1,0 +1,72 @@
+<!-- ==================== predict.html ==================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirWatch - Predict AQI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                <span>AirWatch</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/predict" class="active"><i class="fas fa-chart-line"></i> Predict</a></li>
+                <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Prediction Form -->
+    <div class="prediction-container">
+        <h1 style="text-align: center; margin-bottom: 1rem;">AQI Prediction</h1>
+        <p style="text-align: center; color: #8B949E; margin-bottom: 3rem;">Select a city to get the current air quality prediction</p>
+
+        <form class="prediction-form" action="/predict" method="POST">
+            <div class="form-group">
+                <label for="city">Select City</label>
+                <select id="city" name="city" required>
+                    <option value="">Choose a city...</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Kanpur">Kanpur</option>
+                    <option value="Nagpur">Nagpur</option>
+                    <option value="Visakhapatnam">Visakhapatnam</option>
+                    <option value="Bhopal">Bhopal</option>
+                    <option value="Patna">Patna</option>
+                    <option value="Vadodara">Vadodara</option>
+                    <option value="Agra">Agra</option>
+                    <option value="Nashik">Nashik</option>
+                </select>
+            </div>
+            <button type="submit" class="predict-button">Predict AQI</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <i class="fas fa-cloud"></i>
+            <span>AirWatch</span>
+        </div>
+        <p style="color: #8B949E; margin-bottom: 0.5rem;">Machine Learning powered AQI predictions for a healthier tomorrow</p>
+        <p style="color: #6E7681; font-size: 0.9rem;">© 2025 AirWatch. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
