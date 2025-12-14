@@ -1,74 +1,116 @@
-# 🌫️ AQI (Air Quality Index) Prediction System
+# AQI (Air Quality Index) Prediction System
 
-A machine learning–powered web application that predicts the **Air Quality Index (AQI)** for Indian cities.
-The project uses **Random Forest Regression**, trained on real-world data (`city_day.csv`), and provides a clean UI for users to check AQI by selecting a city.
+A **Machine Learning–based Flask web application** that predicts the **Air Quality Index (AQI)** for Indian cities using historical air-quality data. The system uses **Random Forest Regression** and provides a clean UI for city-wise AQI prediction.
+
+---
+
+## Project Overview
+
+Air pollution is a serious concern across many Indian cities. This project allows users to:
+
+* Select a city
+* Predict AQI values
+* View results through a simple, responsive web interface
+
+The backend is built with **Flask**, and the ML pipeline includes preprocessing, feature scaling, and model persistence using `joblib`.
 
 ---
 
 ## Features
 
-* **AQI Prediction** based on the city and current date
-* **Random Forest Model** trained on real AQI dataset
+* **City-wise AQI prediction**
+* **Random Forest Regression model**
+* Preprocessing with imputer & scaler
 * Flask backend
-* Real-time prediction
-* Clean file structure for easy deployment
+* Clean UI with HTML, CSS, JavaScript
+* Easy retraining of model
+* Organized and scalable project structure
 
 ---
 
 ## Project Structure
 
 ```
-AQI Prediction System/
+AQI (Air Quality Index) Prediction System/
 │── app.py
 │── train_model_city.py
 │── requirements.txt
+│── README.md
 │── .gitignore
 │
 ├── templates/
-│ ├── index.html
-│ └── result.html
+│   ├── index.html        
+│   ├── predict.html      
+│   ├── result.html       
+│   └── about.html        
 │
 ├── static/
-│ ├── style.css
-│ └── script.js
+│   ├── style.css         
+│   └── script.js         
 │
-├── artifacts/ # (NOT uploaded to GitHub)
-│ ├── city_aqi_model.joblib
-│ └── city_label_encoder.joblib
+├── artifacts/
+│   ├── aqi_model.joblib
+│   ├── city_aqi_model.joblib
+│   ├── city_label_encoder.joblib
+│   ├── features.joblib
+│   ├── imputer.joblib
+│   └── scaler.joblib
 │
-└── data/ # (NOT uploaded to GitHub)
-  └── city_day.csv
+├── data/
+│   ├── city_day.csv
+│   └── city_hour.csv
 ```
 
 ---
 
 ## Installation & Setup
-
-### Clone the repository
+ 
+### 1️ Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AQI-Prediction.git
+git clone https://github.com/jainam258/AQI-Prediction.git
 cd AQI-Prediction
 ```
 
+---
+
+### 2️ Create & Activate Virtual Environment
+
 ```bash
-python -m venv venv
-venv/Scripts/activate    # On Linux/macOS: source venv/bin/activate
+python -m venv .venv
 ```
 
-### Install dependencies
+Activate:
+
+* **Windows**
+
+```bash
+.venv\\Scripts\\activate
+```
+
+* **Linux / macOS**
+
+```bash
+source .venv/bin/activate
+```
+
+---
+
+### 3️ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Run the Flask app
+---
+
+### 4️ Run the Application
 
 ```bash
 python app.py
 ```
 
-Now open your browser at:
+Open in browser:
 
 ```
 http://127.0.0.1:5000
@@ -76,34 +118,39 @@ http://127.0.0.1:5000
 
 ---
 
-## Model Information
+## Model & Pipeline Details
 
-* Algorithm: **RandomForestRegressor**
-* Dataset: `city_day.csv`
-* Categorical Encoding: `LabelEncoder` on city names
-* Date Features: **Day, Month, Year**
-* Metrics:
+* **Algorithm:** RandomForestRegressor
+* **Problem Type:** Regression
+* **Datasets:** `city_day.csv`, `city_hour.csv`
+* **Preprocessing:**
 
-  * **R² Score:** ~0.85–0.90
-  * **RMSE:** ~25–35 AQI units
+  * Missing value handling using **Imputer**
+  * Feature scaling using **StandardScaler**
+  * City encoding using **LabelEncoder**
+* **Artifacts Stored Using:** `joblib`
 
-> Since AQI is a **regression problem**, accuracy (%) is **not used**.
+### 📊 Performance (Approx.)
+
+* **R² Score:** ~0.85 – 0.90
+* **RMSE:** ~25 – 35 AQI units
+
+> AQI prediction is a **regression task**, so accuracy (%) is not applicable.
 
 ---
 
-## Training the Model
+## Model Training
 
-To retrain:
+To retrain the model and regenerate artifacts:
 
 ```bash
 python train_model_city.py
 ```
 
-It will generate:
+This will update files inside:
 
 ```
-/artifacts/city_aqi_model.joblib
-/artifacts/city_label_encoder.joblib
+artifacts/
 ```
 
 ---
@@ -111,31 +158,49 @@ It will generate:
 ## UI Preview
 
 * Dark theme
-* Responsive
-* Dropdown city selection
-* Clean prediction output
-* OUTPUT :
-* page 1 <img width="1919" height="926" alt="image" src="https://github.com/user-attachments/assets/71bd6e92-c925-40d8-b092-4acdd757edd2" />
-* page 2 <img width="1919" height="926" alt="image" src="https://github.com/user-attachments/assets/9cea5301-a063-44db-9ecb-7f24d87b2f50" />
+* Responsive design
+* City selection dropdown
+* Clear AQI prediction output
+
+* home page
+  <img width="1898" height="926" alt="image" src="https://github.com/user-attachments/assets/ab0c9ed4-e73c-4f39-8ce8-b88d8bacc87a" />
+
+* about page
+  <img width="1893" height="921" alt="image" src="https://github.com/user-attachments/assets/0337faa6-a01e-4ce7-9b14-7a6175c9b17b" />
+
+* predict page
+  <img width="1906" height="922" alt="image" src="https://github.com/user-attachments/assets/4b23c181-e900-4dc7-9859-65adbfc25d6f" />
+  <img width="1884" height="914" alt="image" src="https://github.com/user-attachments/assets/5b18edd7-6e38-4cb9-96ad-ced1b0642936" />
+  <img width="1900" height="790" alt="image" src="https://github.com/user-attachments/assets/fe9cdb68-888b-4ab4-a8bd-5c93ed997ea9" />
 
 
 ---
 
-## Files Not Included in Repo
+## Ignored Files (.gitignore)
 
-The following large files are intentionally ignored:
+The following are typically ignored to keep the repo clean:
 
 ```
-data/
-artifacts/
+.venv/
+__pycache__/
 *.joblib
 *.csv
 ```
+
+> If you want to keep `artifacts/` or `data/` in GitHub for demo purposes, remove them from `.gitignore`.
 
 ---
 
 ## Contributing
 
-Pull requests are welcome.
-For major changes, open an issue first to discuss what you want to update.
+Contributions are welcome!
 
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Open a pull request
+
+For major changes, please open an issue first.
+
+---
+If you found this project helpful, please give it a star on GitHub!
