@@ -1,3 +1,4 @@
+from download_models import * 
 from flask import Flask, render_template, request
 import joblib
 from datetime import datetime
