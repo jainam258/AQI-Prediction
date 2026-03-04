@@ -1,4 +1,9 @@
-from download_models import * 
+import os
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+
+import download_models
 from flask import Flask, render_template, request
 import joblib
 from datetime import datetime
